@@ -2,11 +2,17 @@ import React, {useState} from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 
+// utilizado para poder navegar entre as telas
+import {useNavigation} from '@react-navigation/native';
+
+
 
 
 export default function Signin() {
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   return (
     <View style={styles.bg}>
       <Image style={styles.logo} source={require('../../assets/logo.png')} />
@@ -32,7 +38,9 @@ export default function Signin() {
         <TouchableOpacity style={styles.botao}>
           <Text style={styles.textoBotao}>Logar</Text>
         </TouchableOpacity>
-        <Text style={{color: 'white'}}>Criar Conta</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+          <Text style={styles.textoSignup}>Criar Conta</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -69,4 +77,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textoBotao: {color: 'white', fontSize: 25},
+  textoSignup: {color: 'white', fontSize: 20},
 });
