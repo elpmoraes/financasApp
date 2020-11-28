@@ -1,11 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
+import {AuthContext} from '../../contexts/auth';
+
+
 
 export default function Signin() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {signUp} = useContext(AuthContext);
+
+  function handleSignUp() {
+    console.log(nome);
+    signUp(nome, email, password);
+  }
   return (
     <View style={styles.bg}>
       <Image style={styles.logo} source={require('../../assets/logo.png')} />
@@ -37,7 +46,7 @@ export default function Signin() {
           value={password}
           onChangeText={(texto) => setPassword(texto)}
         />
-        <TouchableOpacity style={styles.botao}>
+        <TouchableOpacity onPress={handleSignUp} style={styles.botao}>
           <Text style={styles.textoBotao}>Criar</Text>
         </TouchableOpacity>
       </View>

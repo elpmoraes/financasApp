@@ -1,18 +1,18 @@
 // Responsável por compartilhar os dados do usuario por toda a aplicacao
-
-import React, {createContext, useState} from 'react';
+import React, { useState, createContext } from 'react';
 import firebase from '../services/firebaseConnection';
-export const AuthContext = createContext();
+
+export const AuthContext = createContext({});
 
 // o children esta desconstruindo e repassando o valor
 function AuthProvider({children}) {
   const [user, setUser] = useState(null);
 
-    
-    async function signUp(nome, email, password) {
-      await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
+  //Cadastrar usuario
+  async function signUp(nome, email, password) {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
         .then(async (value) => {
           //transformou a funcao anonima em asyncrona, pois vai pegar o que salvou em AUTH para registrar no USERS
           // se der certo, vai pegar o uid do usuario que foi inserido no firebase
@@ -33,18 +33,15 @@ function AuthProvider({children}) {
               };
               setUser(data);
             });
-          //salva o uid na tabela users com o uid que retornou
-        })
-        .catch();
-    }
-    
-    
-  // o signed vai verificar se esta setado um user
-  return (
-    <AuthContext.Provider value={{signed: !!user, user}}>
-      {children}
-    </AuthContext.Provider>
-  );
+        });
+  }
+
+    return (
+      // o signed vai verificar se esta setado um user
+      <AuthContext.Provider value={{signed: !!user, user, signUp}}>
+        {children}
+      </AuthContext.Provider>
+    );
 }
 
 export default AuthProvider;
