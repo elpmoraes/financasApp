@@ -10,7 +10,7 @@ const AppStack = createStackNavigator();
 function AppRoutes() {
   return (
     <AppStack.Navigator>
-      <AuthStack.Screen name="Signin" component={Home} />
+      <AppStack.Screen name="Signin" component={Home} />
     </AppStack.Navigator>
   );
 }

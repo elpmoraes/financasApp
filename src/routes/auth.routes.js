@@ -1,7 +1,7 @@
 // telas de login, cadastro
 
 import React from 'react';
-import {createStackNavigator, HeaderTitle} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import SignIn from '../pages/Signin';
 import SignUp from '../pages/SignUp';
 

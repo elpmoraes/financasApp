@@ -6,11 +6,14 @@ export const AuthContext = createContext();
 
 // o children esta desconstruindo e repassando o valor
 function AuthProvider({children}) {
-  const [user, setUser] = useState({
-    nome: 'Teste',
-  });
+  const [user, setUser] = useState(null);
 
-  return <AuthContext.Provider value={{user}}>{children}</AuthContext.Provider>;
+  // o signed vai verificar se esta setado um user
+  return (
+    <AuthContext.Provider value={{signed: !!user, user}}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export default AuthProvider;
